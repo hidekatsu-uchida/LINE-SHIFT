@@ -1,0 +1,29 @@
+{
+  "id": "./",
+  "name": "LINE SHIFT \u2014 Place \u00b7 Push \u00b7 Connect",
+  "short_name": "LINE SHIFT",
+  "description": "A 3\u20134 player abstract strategy game. Place or push stones to connect five in a row.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "standalone"
+  ],
+  "background_color": "#f7f5ef",
+  "theme_color": "#f7f5ef",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

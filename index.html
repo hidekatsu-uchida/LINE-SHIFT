@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#f7f5ef" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="LINE SHIFT" />
+<meta name="application-name" content="LINE SHIFT" />
+<meta name="format-detection" content="telephone=no" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="LINE SHIFT — Place · Push · Connect" />
+<meta property="og:description" content="A minimalist multiplayer strategy game for 3–4 players. Place a stone or push a line to connect five." />
+<link rel="manifest" href="./manifest.webmanifest" />
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+<meta name="description" content="LINE SHIFT — a strategy game for 3 or 4 players. Place or push stones to make five in a row; recent pushes cannot be immediately reversed." />
+<title>LINE SHIFT — Place or Push</title>
+<style>
+:root{--paper:#f7f5ef;--surface:#fffefa;--ink:#262a2a;--muted:#77807a;--border:#dcded5;--field:#e9ede5;--accent:#303e35;--red:#d66b57;--blue:#5488b6;--gold:#d6a547;--green:#68977e;--shadow:0 18px 50px rgba(31,43,32,.055)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed}button:focus-visible,select:focus-visible{outline:3px solid #6398b3;outline-offset:3px}.shell{max-width:1140px;margin:auto;padding:clamp(15px,3vw,36px)}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:0 0 24px}.brand{display:flex;align-items:center;gap:13px}.brandmark{display:grid;grid-template-columns:repeat(2,13px);gap:3px;transform:rotate(-12deg)}.brandmark i{width:13px;height:13px;border-radius:50%;display:block}.brandmark i:nth-child(1){background:var(--red)}.brandmark i:nth-child(2){background:var(--blue)}.brandmark i:nth-child(3){background:var(--gold)}.brandmark i:nth-child(4){background:var(--green)}.brand-name{font-size:21px;font-weight:820;letter-spacing:-1.1px;line-height:1}.brand-tag{font-size:10px;letter-spacing:2.1px;text-transform:uppercase;color:var(--muted);margin-top:5px;font-weight:700}.tiny-action{background:transparent;border:1px solid var(--border);border-radius:9px;padding:10px 14px;color:var(--ink);font-weight:650;font-size:13px}.tiny-action:hover{background:#eaece5}.main{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(295px,0.8fr);gap:22px;align-items:start}.panel{background:var(--surface);border:1px solid #e0e1d9;box-shadow:var(--shadow);border-radius:20px}.game-panel{padding:clamp(14px,2.5vw,25px)}.head-game{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.eyebrow{font-size:10px;font-weight:800;color:#7b857e;letter-spacing:1.6px;text-transform:uppercase}.turn-title{font-size:clamp(21px,3vw,26px);font-weight:760;letter-spacing:-.7px;margin:6px 0 0}.turn-desc{color:var(--muted);font-size:12px;margin-top:5px;line-height:1.5}.pill{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid var(--border);border-radius:100px;font-size:11px;font-weight:750;white-space:nowrap;color:#646e67}.pill-dot{width:8px;height:8px;border-radius:50%;background:var(--green)}.board-frame{position:relative;max-width:650px;margin:0 auto;background:#dce5d8;border:1px solid #cad4c9;padding:8px;border-radius:14px;box-shadow:inset 0 0 0 1px #edf3e9}.board{display:grid;grid-template-columns:repeat(var(--size),minmax(0,1fr));gap:2px;aspect-ratio:1;user-select:none;touch-action:manipulation}.cell{position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:1;min-width:0;min-height:0;background:#f6f8f2;border:0;border-radius:3px;padding:0;transition:background .13s ease}.cell.empty:hover:not(:disabled){background:#e3e9de}.cell.empty:before{content:'';width:4px;height:4px;background:#c8d2c5;border-radius:50%;position:absolute}.cell .stone{width:75%;height:75%;border-radius:50%;position:relative;box-shadow:inset -2px -4px 7px #00000015,inset 2px 3px 4px #ffffff57,0 2px 3px #14231927;pointer-events:none}.cell .stone:after{content:'';position:absolute;width:32%;height:21%;top:14%;left:22%;background:#ffffff50;filter:blur(4px);border-radius:50%}.stone.p0{background:var(--red)}.stone.p1{background:var(--blue)}.stone.p2{background:var(--gold)}.stone.p3{background:var(--green)}.cell.selected{background:#d0e0d4;outline:2px solid #526f5e;outline-offset:-2px;z-index:1}.cell.selected .stone{transform:scale(1.08)}.cell.last-placed{background:#e5eadf}.cell.in-winning-line{background:#cbdacb;z-index:1;outline:2px solid #698471;outline-offset:-2px}.cell.preview{background:#d9e3da}.cell.preview-end{background:#a6cab8}.cell.preview-end:after{content:'→';position:absolute;color:#4f8069;font-weight:900;font-size:20px}.cell.preview-end.dir-up:after{content:'↑'}.cell.preview-end.dir-down:after{content:'↓'}.cell.preview-end.dir-left:after{content:'←'}.cell.preview-end.dir-right:after{content:'→'}.board.inactive .cell{cursor:default}.actionarea{margin-top:16px;border-top:1px solid var(--border);padding-top:16px;min-height:106px}.action-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.action-left{min-width:0}.section-mini{font-size:13px;font-weight:800;letter-spacing:-.2px}.helper{font-size:12px;color:var(--muted);line-height:1.45;margin-top:6px}.push-controls{display:flex;gap:6px;flex-shrink:0}.direction{width:39px;height:39px;border:1px solid #d5ded4;background:#eef2ea;border-radius:9px;font-size:20px;color:#324e3e;display:flex;align-items:center;justify-content:center}.direction:hover:not(:disabled),.direction.previewing{background:#d0e4d6;border-color:#85b49a}.direction:disabled{opacity:.28}.control-buttons{display:flex;gap:9px;margin-top:14px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 14px;border-radius:9px;border:1px solid var(--border);background:transparent;color:var(--ink);font-weight:750;font-size:12px}.btn:hover:not(:disabled){background:#edf0e9}.btn:disabled{opacity:.35}.btn.primary{background:var(--accent);border-color:var(--accent);color:white}.btn.primary:hover:not(:disabled){background:#485b4e}.side{display:grid;gap:17px}.side-panel{padding:21px}.section-title{font-weight:800;font-size:14px;letter-spacing:-.25px;margin:0 0 13px}.player-list{display:grid;gap:7px}.player{display:flex;align-items:center;justify-content:space-between;border:1px solid transparent;border-radius:10px;padding:10px 12px;background:#f6f7f3;gap:10px}.player.active{border-color:#a5c3ad;background:#edf4ee}.player.win{border-color:#b7cda9;background:#edf4e8}.player-left{display:flex;align-items:center;gap:10px;min-width:0}.player-token{width:24px;height:24px;border-radius:50%;flex-shrink:0;box-shadow:inset -2px -3px 6px #00000015,inset 2px 2px 3px #ffffff66}.player-name{font-weight:780;font-size:13px}.player-type{font-size:11px;color:var(--muted);margin-top:3px}.player-count{font-size:12px;color:#667069;font-weight:750;white-space:nowrap}.badge-turn{background:var(--accent);color:#fff;font-size:9px;letter-spacing:.4px;border-radius:4px;padding:4px 5px;margin-left:5px}.rules{margin:0;padding:0;list-style:none;display:grid;gap:12px}.rules li{display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.55;color:#58635d}.rule-number{width:21px;height:21px;flex:0 0 21px;display:flex;align-items:center;justify-content:center;border:1px solid #d2dcd1;border-radius:6px;color:#516b59;font-weight:850;font-size:11px}.rules strong{color:var(--ink)}.history{display:grid;gap:2px;max-height:155px;overflow:auto;scrollbar-width:thin}.history-row{display:flex;gap:10px;justify-content:space-between;border-bottom:1px solid #f0f0e9;padding:8px 1px;font-size:11px;color:#778078}.history-row strong{color:#505b54;font-weight:700}.footer-note{font-size:11px;color:var(--muted);text-align:center;margin:22px auto 2px;line-height:1.5}.modal-overlay{position:fixed;inset:0;background:#26332b83;display:flex;justify-content:center;align-items:center;padding:18px;z-index:15;backdrop-filter:blur(4px)}.modal-overlay.hidden{display:none}.modal{background:var(--surface);max-width:440px;width:100%;border-radius:21px;padding:25px;box-shadow:0 25px 100px #1b291b37;max-height:min(95vh,760px);overflow:auto}.modal-h{font-size:25px;letter-spacing:-.8px;margin:0 0 7px}.modal-desc{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 21px}.form-row{margin-bottom:18px}.form-label{font-size:12px;font-weight:800;margin-bottom:9px}.segmented{display:flex;background:#edf0e9;padding:4px;border-radius:10px;gap:4px}.segmented button{flex:1;border:0;background:transparent;border-radius:7px;padding:10px 8px;font-size:12px;font-weight:750;color:#707c72}.segmented button.chosen{background:#fff;box-shadow:0 1px 5px #15261b1a;color:#283e2d}.config-player{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #edf0e9}.config-player:last-child{border-bottom:0}.config-identity{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:750}.config-identity .player-token{width:17px;height:17px}.config-player select{background:#f4f5f0;border:1px solid #dfe3d9;padding:8px 10px;border-radius:8px;color:#35453c;font-size:12px;font-weight:700}.modal-actions{display:flex;gap:9px;justify-content:stretch;margin-top:23px}.modal-actions .btn{flex:1;padding:13px 15px}.hidden{display:none!important}.victory-banner{padding:12px;background:#ebf4ea;border:1px solid #c6d9c3;border-radius:9px;margin:0 0 14px;font-size:12px;line-height:1.5}.victory-banner strong{display:block;font-size:15px;margin-bottom:3px}.gameend{padding:10px 14px;border-radius:9px;border:1px solid #c3d4bf;background:#e9f2e6;margin:0 0 16px}.gameend h3{font-size:20px;letter-spacing:-.5px;margin:0 0 4px}.gameend p{font-size:12px;margin:0;color:#647367}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden;white-space:nowrap}
+@media(max-width:800px){.main{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr}.side-panel:last-child{grid-column:1/-1}.board-frame{max-width:600px}.topbar{margin-bottom:15px}}
+@media(max-width:530px){.shell{padding:12px}.topbar{padding:4px 2px 0}.brand-name{font-size:19px}.brand-tag{font-size:9px}.main{gap:12px}.game-panel{padding:12px;border-radius:14px}.head-game{margin-bottom:12px}.turn-title{font-size:21px}.turn-desc{font-size:11px}.board-frame{padding:5px;border-radius:8px}.board{gap:1.5px}.cell{border-radius:2px}.actionarea{margin-top:12px;padding-top:12px}.push-controls{gap:4px}.direction{width:36px;height:37px;font-size:18px}.side{grid-template-columns:1fr;gap:12px}.side-panel{padding:16px}.side-panel:last-child{grid-column:auto}.footer-note{margin-top:17px}.pill{padding:7px 9px;font-size:10px}.modal{padding:20px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.lock-note{margin-top:11px;padding:9px 11px;background:#f3f0e9;border:1px solid #e8ddc8;color:#72644d;border-radius:9px;font-size:11px;line-height:1.45}
+.direction.locked:disabled{opacity:.75;background:#f6e8dd;border-color:#d9b79c;color:#a06439}
+/* iPhone-specific enhancements: full safe-area support and comfortable touch targets. */
+html{height:100%;-webkit-text-size-adjust:100%}
+body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent}
+button,select{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.board,.board *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.direction{min-width:44px;min-height:44px}
+.install-link{background:none;border:0;color:#596b60;text-decoration:underline;text-underline-offset:3px;font-size:11px;font-weight:700;padding:6px 8px}
+.install-link:hover{color:#263e2e}
+.modal ol.install-steps{padding:0 0 0 20px;margin:0 0 15px;color:#56645a;font-size:13px;line-height:1.8}
+.modal ol.install-steps li{margin:6px 0}
+.modal .install-footnote{background:#f1f5ef;padding:12px;border-radius:9px;color:#506456;font-size:12px;line-height:1.5}
+.toast{position:fixed;left:50%;bottom:max(15px,env(safe-area-inset-bottom));transform:translateX(-50%);background:#24372c;color:white;border-radius:100px;padding:10px 18px;box-shadow:0 10px 40px #0003;z-index:30;font-size:12px;font-weight:700;pointer-events:none}
+@media(max-width:530px){
+  .shell{padding-top:max(11px,env(safe-area-inset-top));padding-right:max(8px,env(safe-area-inset-right));padding-bottom:max(14px,env(safe-area-inset-bottom));padding-left:max(8px,env(safe-area-inset-left))}
+  .topbar{gap:10px;padding:3px 5px 0;margin-bottom:11px}
+  .brand{gap:10px}.brandmark{grid-template-columns:repeat(2,11px);gap:3px}.brandmark i{width:11px;height:11px}
+  .topbar .tiny-action{padding:11px 12px;white-space:nowrap}
+  .game-panel{padding:11px 8px 13px}.head-game{padding:0 3px}
+  .turn-title{font-size:21px}.turn-desc{max-width:220px}
+  .pill{font-size:9px;letter-spacing:-.15px;padding:7px 7px}.pill-dot{width:7px;height:7px}
+  .board-frame{padding:3px;border-radius:8px}.board{gap:1px}.cell{border-radius:2px}
+  .cell .stone{width:81%;height:81%;box-shadow:inset -2px -3px 5px #00000018,inset 2px 2px 3px #ffffff66,0 1px 2px #14231920}
+  .actionarea{margin-top:13px;padding:13px 4px 0;min-height:106px}
+  .direction{width:44px;height:44px;border-radius:10px;font-size:21px}
+  .action-left{flex:1}.helper{font-size:12px}
+  .control-buttons{gap:6px}.control-buttons .btn{padding:11px 9px;font-size:11px;flex:1;min-height:42px}
+  .side-panel{padding:15px}.player{padding:9px 11px}
+  .footer-note{padding-bottom:max(4px,env(safe-area-inset-bottom))}
+  .modal-overlay{align-items:center;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
+  .modal{max-height:calc(100dvh - 30px);padding:19px;border-radius:18px}
+  .segmented button{min-height:44px}
+  .config-player select{min-height:42px}
+  .modal-actions .btn{min-height:46px}
+}
+@media(max-width:385px){.turn-desc{max-width:170px}.pill{max-width:126px;white-space:normal;text-align:center}.push-controls{gap:3px}.direction{width:42px;min-width:42px}.section-mini{font-size:12px}.helper{font-size:11px}}
+@media(display-mode:standalone){.footer-note{opacity:.75}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><div class="brandmark" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div><div class="brand-name">LINE SHIFT</div><div class="brand-tag">Place · Push · Connect</div></div></div>
+    <button class="tiny-action" id="newGameTop">New game ↗</button>
+  </header>
+  <main class="main">
+    <section class="panel game-panel" aria-label="Game board">
+      <div class="head-game">
+        <div><div class="eyebrow" id="turn-eyebrow">TURN 01</div><h1 class="turn-title" id="turn-title">Red to play</h1><div class="turn-desc" id="turn-desc">Place a stone, or select yours to push.</div></div>
+        <div class="pill"><span class="pill-dot"></span><span id="game-meta">3 PLAYERS · 5 IN A ROW</span></div>
+      </div>
+      <div id="end-banner"></div>
+      <div class="board-frame"><div class="board" id="board" role="grid" aria-label="LINE SHIFT board"></div></div>
+      <div class="actionarea">
+        <div class="action-row">
+          <div class="action-left"><div class="section-mini" id="action-title">Choose a move</div><div class="helper" id="action-help">Tap an empty square to place your stone. Tap your own stone to see available pushes.</div></div>
+          <div class="push-controls" id="push-controls" aria-label="Push directions">
+            <button class="direction" type="button" data-dir="up" title="Push up" aria-label="Push up" disabled>↑</button>
+            <button class="direction" type="button" data-dir="right" title="Push right" aria-label="Push right" disabled>→</button>
+            <button class="direction" type="button" data-dir="down" title="Push down" aria-label="Push down" disabled>↓</button>
+            <button class="direction" type="button" data-dir="left" title="Push left" aria-label="Push left" disabled>←</button>
+          </div>
+        </div>
+        <div class="lock-note hidden" id="lock-note" aria-live="polite"></div>
+        <div class="control-buttons"><button id="undo" class="btn">↶ Undo turn</button><button id="clear-selection" class="btn" disabled>× Cancel selection</button><button id="reset" class="btn">↻ Restart</button></div>
+      </div>
+    </section>
+    <aside class="side">
+      <section class="panel side-panel"><h2 class="section-title">Players</h2><div class="player-list" id="players"></div></section>
+      <section class="panel side-panel"><h2 class="section-title">How to play</h2><ol class="rules"><li><span class="rule-number">1</span><span><strong>Place</strong> one stone on any empty square <em>or</em> <strong>push</strong> a line. Never both in the same turn.</span></li><li><span class="rule-number">2</span><span>To <strong>push</strong>, select your stone at the <strong>end</strong> of an uninterrupted row or column. The space beyond the other end must be empty. All stones in that line shift one square, even opponents' stones.</span></li><li><span class="rule-number">3</span><span><strong>No immediate reversal:</strong> stones that were pushed cannot be pushed in the opposite direction until the player who pushed them finishes their next turn. Perpendicular pushes are still allowed.</span></li><li><span class="rule-number">4</span><span>Make <strong id="win-rule">5</strong> of your own stones in a straight line—horizontal, vertical, or diagonal—to win <strong>at the end of your turn</strong>.</span></li></ol></section>
+      <section class="panel side-panel"><div style="display:flex;justify-content:space-between;align-items:center"><h2 class="section-title" style="margin-bottom:7px">Move history</h2><span id="move-total" class="eyebrow">0 MOVES</span></div><div id="history" class="history"><div class="helper">No moves yet.</div></div></section>
+    </aside>
+  </main>
+  <footer class="footer-note">Pass-and-play or challenge computer opponents · Automatically saves on this device.<br/><button class="install-link" type="button" id="install-help">How to add LINE SHIFT to your iPhone Home Screen ↗</button></footer>
+</div>
+<div class="modal-overlay hidden" id="setup-overlay" role="dialog" aria-modal="true" aria-labelledby="setup-title">
+  <div class="modal">
+    <h2 class="modal-h" id="setup-title">Set up your game</h2>
+    <p class="modal-desc">Play together on one screen, against computer opponents, or mix both. Set the target, then place or push your way to a straight line.</p>
+    <div class="form-row"><div class="form-label">Players</div><div class="segmented" id="player-choice"><button type="button" data-value="3">3 players</button><button type="button" data-value="4">4 players</button></div></div>
+    <div class="form-row"><div class="form-label">Winning line</div><div class="segmented" id="target-choice"><button type="button" data-value="5">5 stones · 9×9 board</button><button type="button" data-value="4">4 stones · 8×8 board</button></div></div>
+    <div class="form-row"><div class="form-label">Who plays?</div><div id="config-players"></div></div>
+    <div class="modal-actions"><button class="btn" id="close-setup">Cancel</button><button class="btn primary" id="start-game">Start game →</button></div>
+  </div>
+</div>
+<div class="modal-overlay hidden" id="install-overlay" role="dialog" aria-modal="true" aria-labelledby="install-title">
+  <div class="modal">
+    <h2 class="modal-h" id="install-title">Install LINE SHIFT</h2>
+    <p class="modal-desc">Publish the included files to an HTTPS website, then open the link in Safari on your iPhone.</p>
+    <ol class="install-steps"><li>Tap the <strong>Share</strong> button in Safari (you might first tap the page menu).</li><li>Choose <strong>Add to Home Screen</strong>.</li><li>Enable <strong>Open as Web App</strong>, then tap <strong>Add</strong>.</li></ol>
+    <p class="install-footnote">LINE SHIFT opens like an app from your Home Screen, works offline after its first successful load, and saves games on your device. Multiplayer is on one shared device, not online.</p>
+    <div class="modal-actions"><button class="btn primary" type="button" id="install-close">Got it</button></div>
+  </div>
+</div>
+<div id="announcer" class="sr-only" aria-live="polite"></div>
+<script id="engine">
+/* Pure game logic — intentionally separate for testability. */
+(function(root){
+  'use strict';
+  const DIRS={up:[-1,0],right:[0,1],down:[1,0],left:[0,-1]};
+  const DIR_KEYS=['up','right','down','left'];
+  const OPPOSITE={up:'down',down:'up',left:'right',right:'left'};
+  function index(r,c,n){return r*n+c;}
+  function at(r,c,n){return r>=0&&c>=0&&r<n&&c<n;}
+  function pushDetails(board,n,source,direction,player,ids=null,locks=[]){
+    const d=DIRS[direction];if(!d||board[source]!==player)return null;
+    let r=Math.floor(source/n),c=source%n;
+    // A pushing stone must actually be at the end of the COMPLETE contiguous line.
+    if(at(r-d[0],c-d[1],n)&&board[index(r-d[0],c-d[1],n)]!==-1)return null;
+    const line=[];
+    while(at(r,c,n)&&board[index(r,c,n)]!==-1){line.push(index(r,c,n));r+=d[0];c+=d[1];}
+    if(!at(r,c,n))return null;
+    // Locks follow individual stones, not rows or colors. A reverse push is
+    // illegal if it would move ANY stone still protected by an earlier push.
+    if(ids&&locks.some(lock=>lock.dir===OPPOSITE[direction]&&line.some(pos=>lock.stoneIds.includes(ids[pos]))))return null;
+    return {line,dest:index(r,c,n),source,dir:direction};
+  }
+  function applyTurn(state,move,player=state.current){
+    const n=state.n,board=state.board.slice(),ids=state.ids.slice();
+    let nextStoneId=state.nextStoneId;
+    let movedStoneIds=null;
+    if(move.type==='place'){
+      if(!Number.isInteger(move.at)||move.at<0||move.at>=n*n||board[move.at]!==-1)return null;
+      board[move.at]=player;
+      ids[move.at]=nextStoneId++;
+    }else if(move.type==='push'){
+      const detail=pushDetails(board,n,move.at,move.dir,player,ids,state.locks);
+      if(!detail)return null;
+      movedStoneIds=detail.line.map(pos=>ids[pos]);
+      for(let j=detail.line.length-1;j>=0;j--){
+        const from=detail.line[j];
+        const to=j===detail.line.length-1?detail.dest:detail.line[j+1];
+        board[to]=board[from];ids[to]=ids[from];
+      }
+      board[detail.source]=-1;ids[detail.source]=null;
+    }else return null;
+    // Protection expires only AFTER its owner's next completed move, so that
+    // every intervening opponent has played before the reversal is available.
+    const locks=state.locks.filter(lock=>lock.by!==player);
+    if(movedStoneIds)locks.push({by:player,dir:move.dir,stoneIds:movedStoneIds});
+    return {board,ids,locks,nextStoneId};
+  }
+  function applyMove(board,n,move,player){
+    const next=board.slice();
+    if(move.type==='place'){
+      if(!Number.isInteger(move.at)||move.at<0||move.at>=n*n||next[move.at]!==-1)return null;
+      next[move.at]=player;
+    }else if(move.type==='push'){
+      const detail=pushDetails(next,n,move.at,move.dir,player);
+      if(!detail)return null;
+      for(let j=detail.line.length-1;j>=0;j--){
+        const from=detail.line[j];
+        const to=j===detail.line.length-1?detail.dest:detail.line[j+1];
+        next[to]=next[from];
+      }
+      next[detail.source]=-1;
+    }else return null;
+    return next;
+  }
+  function segments(n,k){
+    const lines=[];
+    const vectors=[[0,1],[1,0],[1,1],[1,-1]];
+    for(let r=0;r<n;r++)for(let c=0;c<n;c++)for(const [dr,dc] of vectors){
+      if(!at(r+(k-1)*dr,c+(k-1)*dc,n))continue;
+      lines.push(Array.from({length:k},(_,a)=>index(r+a*dr,c+a*dc,n)));
+    }
+    return lines;
+  }
+  function findWin(board,player,lines){
+    return lines.find(line=>line.every(i=>board[i]===player))||null;
+  }
+  function actions(board,n,player,ids=null,locks=[]){
+    const out=[];
+    for(let i=0;i<board.length;i++){
+      if(board[i]===-1)out.push({type:'place',at:i});
+      else if(board[i]===player)for(const dir of DIR_KEYS){
+        if(pushDetails(board,n,i,dir,player,ids,locks))out.push({type:'push',at:i,dir});
+      }
+    }
+    return out;
+  }
+  function moveLabel(move,n){
+    const r=Math.floor(move.at/n),c=move.at%n;
+    const square=String.fromCharCode(65+c)+(r+1);
+    if(move.type==='place')return 'placed at '+square;
+    return 'pushed '+move.dir+' from '+square;
+  }
+  root.GameCore={DIRS,DIR_KEYS,OPPOSITE,index,at,pushDetails,applyMove,applyTurn,segments,findWin,actions,moveLabel};
+})(typeof window!=='undefined'?window:globalThis);
+</script>
+<script>
+(function(){
+  'use strict';
+  const C=window.GameCore;
+  const NAMES=['Red','Blue','Gold','Green'];
+  const COLORS=['var(--red)','var(--blue)','var(--gold)','var(--green)'];
+  const $=id=>document.getElementById(id);
+  const setup=$('setup-overlay');
+  const defaults={playerCount:3,target:5,types:['human','bot','bot','human']};
+  let config=JSON.parse(JSON.stringify(defaults));
+  let state,history=[],selected=null,preview=null,botTimer=null,botBusy=false;
+  let gameId=0;
+  const SAVE_KEY='line-shift-iphone-v3-save';
+  function writeSave(){
+    if(!state)return;
+    try{localStorage.setItem(SAVE_KEY,JSON.stringify({version:3,config,state,history:history.slice(-300)}));}catch(_){/* Private mode or exhausted storage; the game still works. */}
+  }
+  function readSave(){
+    try{
+      const data=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+      if(!data||data.version!==3||!data.state)return false;
+      const s=data.state,cf=data.config;
+      if(!cf||![3,4].includes(s.playerCount)||![4,5].includes(s.k)||s.n!==(s.k===5?9:8))return false;
+      if(!Array.isArray(s.board)||s.board.length!==s.n*s.n||!s.board.every(p=>Number.isInteger(p)&&p>=-1&&p<s.playerCount))return false;
+      if(!Array.isArray(s.ids)||s.ids.length!==s.board.length||!Array.isArray(s.locks)||!Array.isArray(s.log))return false;
+      if(!Array.isArray(s.types)||s.types.length<3||!Array.isArray(cf.types)||!Number.isInteger(s.current)||s.current<0||s.current>=s.playerCount)return false;
+      if(!Number.isInteger(s.moves)||s.moves<0||!Number.isInteger(s.nextStoneId)||s.nextStoneId<1)return false;
+      if(!s.locks.every(lock=>Number.isInteger(lock.by)&&C.DIR_KEYS.includes(lock.dir)&&Array.isArray(lock.stoneIds)))return false;
+      config=cf;state=s;history=Array.isArray(data.history)?data.history:[];
+      return true;
+    }catch(_){return false;}
+  }
+  function cloneState(s){return {...s,board:s.board.slice(),ids:s.ids.slice(),locks:s.locks.map(l=>({...l,stoneIds:l.stoneIds.slice()})),winLine:s.winLine?s.winLine.slice():null,log:s.log.slice(),lastMove:s.lastMove?{...s.lastMove}:null};}
+  function clearBot(){if(botTimer!==null){clearTimeout(botTimer);botTimer=null;}botBusy=false;}
+  function newGame(){
+    clearBot();gameId++;
+    const n=config.target===5?9:8;
+    state={n,k:config.target,playerCount:config.playerCount,types:config.types.slice(),board:Array(n*n).fill(-1),ids:Array(n*n).fill(null),nextStoneId:1,locks:[],current:0,moves:0,winner:null,draw:false,winLine:null,log:[],lastMove:null};
+    selected=null;preview=null;history=[];writeSave();render();scheduleBot();
+  }
+  function activeHuman(){return state&&!state.draw&&state.winner===null&&!botBusy&&state.types[state.current]==='human';}
+  function doMove(move){
+    if(!state||state.winner!==null||state.draw)return false;
+    const changed=C.applyTurn(state,move);
+    if(!changed)return false;
+    history.push(cloneState(state));
+    const actor=state.current;
+    state.board=changed.board;state.ids=changed.ids;state.locks=changed.locks;state.nextStoneId=changed.nextStoneId;state.moves++;
+    state.lastMove={...move,player:actor};
+    state.log.unshift({move:state.moves,player:actor,text:C.moveLabel(move,state.n)});
+    const winning=C.findWin(changed.board,actor,C.segments(state.n,state.k));
+    if(winning){state.winner=actor;state.winLine=winning;}
+    else if(state.moves>=300||!changed.board.includes(-1)){state.draw=true;}
+    else state.current=(state.current+1)%state.playerCount;
+    selected=null;preview=null;
+    writeSave();render();
+    if(state.winner!==null)$('announcer').textContent=NAMES[actor]+' wins!';
+    else if(state.draw)$('announcer').textContent='Draw!';
+    else $('announcer').textContent=NAMES[actor]+' '+C.moveLabel(move,state.n);
+    if(state.winner===null&&!state.draw)scheduleBot();
+    return true;
+  }
+  function scheduleBot(){
+    if(!state||state.winner!==null||state.draw||state.types[state.current]!=='bot')return;
+    clearBot();botBusy=true;render();const id=gameId;
+    botTimer=setTimeout(()=>{
+      botTimer=null;
+      if(id!==gameId||!state||state.winner!==null||state.draw||state.types[state.current]!=='bot')return;
+      const move=chooseBotMove(state);
+      botBusy=false;
+      if(move)doMove(move);else{state.draw=true;render();}
+    },440);
+  }
+  // Lightweight tactical opponent: prioritizes immediate wins, avoids leaving an
+  // immediate win to the next player, and values open lines and multiple threats.
+  function chooseBotMove(s){
+    const n=s.n,k=s.k,me=s.current,lines=C.segments(n,k);
+    const all=C.actions(s.board,n,me,s.ids,s.locks);
+    if(!all.length)return null;
+    const nextPlayer=(me+1)%s.playerCount;
+    let best=-Infinity,options=[];
+    // A full winning-path scan is performed for each hypothetical move.
+    for(const move of all){
+      const next=C.applyTurn(s,move,me);
+      if(!next)continue;
+      const b=next.board;
+      if(C.findWin(b,me,lines))return move;
+      let score=0;
+      const mine=[0,0,0,0,0,0];
+      const theirs=Array.from({length:s.playerCount},()=>[0,0,0,0,0,0]);
+      for(const line of lines){
+        const counts=Array(s.playerCount).fill(0);
+        for(const pos of line)if(b[pos]!==-1)counts[b[pos]]++;
+        const occupied=counts.filter(x=>x>0).length;
+        if(occupied===1){
+          const p=counts.findIndex(x=>x>0);
+          if(p===me)mine[counts[p]]++;
+          else theirs[p][counts[p]]++;
+        }
+      }
+      const weights=k===4?[0,0.35,2.6,17,20000]:[0,0.25,1.2,5.5,34,20000];
+      for(let count=1;count<k;count++){
+        score+=mine[count]*weights[count];
+        for(let p=0;p<s.playerCount;p++)if(p!==me){
+          const urgency=p===nextPlayer?1.25:0.92;
+          score-=theirs[p][count]*weights[count]*urgency;
+        }
+      }
+      // Slight positional pull to the middle, but never at the cost of a strong threat.
+      const r=Math.floor(move.at/n),c=move.at%n;
+      if(move.type==='place')score+=1.5-(Math.abs(r-(n-1)/2)+Math.abs(c-(n-1)/2))*.10;
+      else score+=.55;
+      // Count double threats as an important source of attack pressure.
+      score+=mine[k-1]*mine[k-1]*1.4;
+      // A player with a directly completable threat may win on their next move.
+      // Exact tactic: consider all legal actions of the next player, including pushes.
+      let nextCanWin=false;
+      const nextState={...s,...next,current:nextPlayer};
+      for(const reply of C.actions(b,n,nextPlayer,next.ids,next.locks)){
+        const after=C.applyTurn(nextState,reply,nextPlayer);
+        if(after&&C.findWin(after.board,nextPlayer,lines)){nextCanWin=true;break;}
+      }
+      if(nextCanWin)score-=4000;
+      // Small randomness only resolves near-equal alternatives.
+      score+=Math.random()*.22;
+      if(score>best+0.00001){best=score;options=[move];}
+      else if(Math.abs(score-best)<0.00001)options.push(move);
+    }
+    return options[Math.floor(Math.random()*options.length)];
+  }
+  function render(){
+    if(!state)return;
+    const won=state.winner!==null;
+    $('game-meta').textContent=state.playerCount+' PLAYERS · '+state.k+' IN A ROW';
+    $('win-rule').textContent=state.k;
+    $('turn-eyebrow').textContent=won||state.draw?'GAME OVER':'TURN '+String(state.moves+1).padStart(2,'0');
+    $('turn-title').textContent=won?NAMES[state.winner]+' wins!':state.draw?'It’s a draw':NAMES[state.current]+' to play';
+    $('turn-title').style.color=won?COLORS[state.winner]:'var(--ink)';
+    $('turn-desc').textContent=won?'A perfect straight line. Play again?':state.draw?'No winner this game. Try a rematch.':botBusy?'Computer is choosing a move…':state.types[state.current]==='bot'?'Computer’s turn.':'Place a stone, or select yours to push.';
+    $('end-banner').innerHTML=won?'<div class="gameend"><h3>✦ '+NAMES[state.winner]+' connects '+state.k+'!</h3><p>Victory in '+state.moves+' moves. Restart for a rematch.</p></div>':state.draw?'<div class="gameend"><h3>Draw</h3><p>No winning line was completed.</p></div>':'';
+    const board=$('board');board.style.setProperty('--size',state.n);board.classList.toggle('inactive',!activeHuman());
+    const frag=document.createDocumentFragment();
+    const selectedMoves=selected===null?[]:C.DIR_KEYS.filter(dir=>!!C.pushDetails(state.board,state.n,selected,dir,state.current,state.ids,state.locks));
+    const lockedMoves=selected===null?[]:C.DIR_KEYS.filter(dir=>C.pushDetails(state.board,state.n,selected,dir,state.current)&&!C.pushDetails(state.board,state.n,selected,dir,state.current,state.ids,state.locks));
+    const detail=selected!==null&&preview?C.pushDetails(state.board,state.n,selected,preview,state.current,state.ids,state.locks):null;
+    for(let i=0;i<state.board.length;i++){
+      const token=state.board[i];const cell=document.createElement('button');
+      cell.className='cell'+(token===-1?' empty':'');cell.type='button';cell.dataset.index=i;
+      cell.setAttribute('role','gridcell');
+      const r=Math.floor(i/state.n),c=i%state.n;
+      cell.setAttribute('aria-label',String.fromCharCode(65+c)+(r+1)+': '+(token===-1?'empty':NAMES[token]));
+      if(token!==-1){const stone=document.createElement('div');stone.className='stone p'+token;cell.appendChild(stone);}
+      if(i===selected)cell.classList.add('selected');
+      if(state.winLine?.includes(i))cell.classList.add('in-winning-line');
+      if(state.lastMove?.type==='place'&&state.lastMove.at===i&&!won)cell.classList.add('last-placed');
+      if(detail){if(detail.line.includes(i))cell.classList.add('preview');if(detail.dest===i)cell.classList.add('preview-end','dir-'+preview);}
+      cell.disabled=!activeHuman();
+      frag.appendChild(cell);
+    }
+    board.replaceChildren(frag);
+    const controls=$('push-controls');
+    for(const button of controls.querySelectorAll('button')){
+      button.disabled=!activeHuman()||!selectedMoves.includes(button.dataset.dir);
+      button.classList.toggle('previewing',button.dataset.dir===preview&&selectedMoves.includes(button.dataset.dir));
+      button.classList.toggle('locked',lockedMoves.includes(button.dataset.dir));
+      button.title=lockedMoves.includes(button.dataset.dir)?'Reverse push temporarily locked':'Push '+button.dataset.dir;
+    }
+    const lockNote=$('lock-note');
+    if(state.locks.length){
+      const details=state.locks.map(lock=>NAMES[lock.by]+' pushed '+lock.dir+' (reverse blocked until '+NAMES[lock.by]+' finishes their next turn)');
+      lockNote.textContent='↶ Reverse-push protection: '+details.join(' · ')+'.';
+      lockNote.classList.remove('hidden');
+    }else lockNote.classList.add('hidden');
+    if(won||state.draw){$('action-title').textContent='Game complete';$('action-help').textContent='Start a new game or restart with the same settings.';}
+    else if(botBusy){$('action-title').textContent='Thinking…';$('action-help').textContent='The computer is evaluating placements and pushes.';}
+    else if(selected!==null){$('action-title').textContent='Push a line';$('action-help').textContent=selectedMoves.length?'Choose a direction. Every touching stone moves one square.':lockedMoves.length?'Push temporarily blocked: it would reverse a protected move. Place a stone or choose another push.':'This stone cannot push; it needs an open space ahead and must be at the end of its line.';}
+    else{$('action-title').textContent='Choose a move';$('action-help').textContent='Tap an empty square to place. Tap your own stone to push an entire line.';}
+    $('undo').disabled=!history.length;
+    $('clear-selection').disabled=selected===null;
+    const players=$('players');players.innerHTML='';
+    for(let p=0;p<state.playerCount;p++){
+      const row=document.createElement('div');row.className='player'+(!won&&!state.draw&&state.current===p?' active':'')+(won&&p===state.winner?' win':'');
+      const count=state.board.filter(x=>x===p).length;
+      row.innerHTML='<div class="player-left"><span class="player-token" style="background:'+COLORS[p]+'"></span><div><div class="player-name">'+NAMES[p]+' '+(!won&&!state.draw&&state.current===p?'<span class="badge-turn">TURN</span>':won&&p===state.winner?'<span class="badge-turn">WINNER</span>':'')+'</div><div class="player-type">'+(state.types[p]==='bot'?'Computer':'Human')+'</div></div></div><div class="player-count">'+count+' '+(count===1?'stone':'stones')+'</div>';
+      players.appendChild(row);
+    }
+    $('move-total').textContent=state.moves+' MOVES';
+    $('history').innerHTML=state.log.length?state.log.slice(0,12).map(l=>'<div class="history-row"><span><strong>'+NAMES[l.player]+'</strong> '+l.text+'</span><span>#'+l.move+'</span></div>').join(''):'<div class="helper">No moves yet.</div>';
+  }
+  $('board').addEventListener('click',e=>{
+    const cell=e.target.closest('.cell');if(!cell||!activeHuman())return;
+    const i=Number(cell.dataset.index),p=state.board[i];
+    if(p===-1){doMove({type:'place',at:i});return;}
+    if(p===state.current){selected=selected===i?null:i;preview=null;render();}
+  });
+  $('push-controls').addEventListener('click',e=>{
+    const button=e.target.closest('button[data-dir]');
+    if(!button||button.disabled||selected===null||!activeHuman())return;
+    doMove({type:'push',at:selected,dir:button.dataset.dir});
+  });
+  $('push-controls').addEventListener('mouseover',e=>{const b=e.target.closest('button[data-dir]');if(b&&!b.disabled&&preview!==b.dataset.dir){preview=b.dataset.dir;render();}});
+  $('push-controls').addEventListener('mouseleave',()=>{if(preview){preview=null;render();}});
+  $('clear-selection').onclick=()=>{selected=null;preview=null;render();};
+  $('undo').onclick=()=>{
+    if(!history.length)return;
+    clearBot();gameId++;
+    do{state=history.pop();}while(history.length&&state.types[state.current]==='bot');
+    selected=null;preview=null;writeSave();render();
+    if(state.types[state.current]==='bot')scheduleBot();
+  };
+  $('reset').onclick=()=>newGame();
+  function configRender(){
+    for(const [id,value] of [['player-choice',config.playerCount],['target-choice',config.target]]){
+      for(const btn of $(id).querySelectorAll('button'))btn.classList.toggle('chosen',Number(btn.dataset.value)===value);
+    }
+    $('config-players').innerHTML='';
+    for(let p=0;p<config.playerCount;p++){
+      const row=document.createElement('div');row.className='config-player';
+      row.innerHTML='<div class="config-identity"><span class="player-token" style="background:'+COLORS[p]+'"></span>'+NAMES[p]+'</div><select aria-label="'+NAMES[p]+' player type" data-player="'+p+'"><option value="human">Human</option><option value="bot">Computer</option></select>';
+      row.querySelector('select').value=config.types[p];$('config-players').appendChild(row);
+    }
+  }
+  function showSetup(){clearBot();configRender();setup.classList.remove('hidden');$('start-game').focus();}
+  function closeSetup(){setup.classList.add('hidden');scheduleBot();}
+  $('newGameTop').onclick=showSetup;
+  $('close-setup').onclick=closeSetup;
+  for(const id of ['player-choice','target-choice'])$(id).addEventListener('click',e=>{
+    const btn=e.target.closest('button[data-value]');if(!btn)return;
+    if(id==='player-choice')config.playerCount=Number(btn.dataset.value);
+    else config.target=Number(btn.dataset.value);
+    configRender();
+  });
+  $('config-players').addEventListener('change',e=>{
+    const p=Number(e.target.dataset.player);if(Number.isInteger(p)&&p>=0&&p<4)config.types[p]=e.target.value;
+  });
+  $('start-game').onclick=()=>{setup.classList.add('hidden');newGame();};
+  setup.addEventListener('click',e=>{if(e.target===setup)closeSetup();});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&!setup.classList.contains('hidden')){closeSetup();return;}
+    if(!activeHuman()||!setup.classList.contains('hidden'))return;
+    if(e.key==='Escape'&&selected!==null){selected=null;preview=null;render();return;}
+    const mapping={ArrowUp:'up',ArrowRight:'right',ArrowDown:'down',ArrowLeft:'left'};
+    if(selected!==null&&mapping[e.key]&&C.pushDetails(state.board,state.n,selected,mapping[e.key],state.current,state.ids,state.locks)){
+      e.preventDefault();doMove({type:'push',at:selected,dir:mapping[e.key]});
+    }
+  });
+  // Provide an on-device installation guide; no misleading automatic iOS install dialog.
+  const installOverlay=$('install-overlay');
+  $('install-help').onclick=()=>{installOverlay.classList.remove('hidden');$('install-close').focus();};
+  $('install-close').onclick=()=>installOverlay.classList.add('hidden');
+  installOverlay.addEventListener('click',e=>{if(e.target===installOverlay)installOverlay.classList.add('hidden');});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!installOverlay.classList.contains('hidden'))installOverlay.classList.add('hidden');});
+  // Resume the game where it was left, even when iOS removes the web app from memory.
+  if(readSave()){selected=null;preview=null;render();scheduleBot();}else newGame();
+  // Cache the game for offline play when hosted over HTTPS (file:// still works online/local).
+  if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+    window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{});});
+  }
+})();
+</script>
+</body>
+</html>
